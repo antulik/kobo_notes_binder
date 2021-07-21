@@ -1,3 +1,8 @@
 #!/usr/bin/env ruby
 
-require "kobo_notes_binder"
+require "kobo_notes_binder/cli"
+
+# Memo for Anton
+#   be kobo_notes_binder --kobo="/Users/anton/projects/kobo_notes_binder/tmp/fake_kobo_device" --open --application="Adobe Digital Editions 4.5.app"
+
+KoboNotesBinder::Cli.new.start(ARGV)
