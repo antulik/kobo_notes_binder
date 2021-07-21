@@ -14,7 +14,7 @@ The tool never changes files on the device, so it is safe to use it.
 ## Usage
 
 1. Plug-in Kobo device 
-2. Run command `kobo_notes_binder` in terminal
+2. Run command `kobo_notes_binder` in terminal and follow instructions
 3. Find book on your Desktop
 
 ## Advance Usage
