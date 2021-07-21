@@ -26,7 +26,7 @@ The tool never changes files on the device, so it is safe to use it.
 - Export embedded book highlights
 
 Not tested
-- Ruby version less than 3.0
+- Ruby version <2.6
 - Non-DRM books purchased in Kobo store
 
 Not supported
