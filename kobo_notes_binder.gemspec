@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Anton Katunin"]
   spec.email         = ["antulik@gmail.com"]
 
-  spec.summary       = "Command line to export kobo device notes binded in the book"
-  spec.description   = "Command line to export kobo device notes binded in the book"
+  spec.summary       = "Command line to export Kobo device notes bound in the book"
+  spec.description   = "Command line to export Kobo device notes bound in the book"
   spec.homepage      = "https://github.com/antulik/kobo_notes_binder"
   spec.license       = "MIT"
   spec.required_ruby_version = ">= 2.4.0"

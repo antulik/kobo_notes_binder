@@ -1,28 +1,40 @@
 # KoboNotesBinder
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/kobo_notes_binder`. To experiment with that code, run `bin/console` for an interactive prompt.
+KoboNotesBinder exports your Kobo book highlights bound inside the book.
+In other words, you get a copy of the book with your markings in it.
 
-TODO: Delete this and the text above, and describe your gem
+This is an early version and most likely there cases that it doesn't support. If you found issues or have ideas please raise them here. 
+
+The tool never changes files on the device, so it is safe to use it.
 
 ## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'kobo_notes_binder'
-```
-
-And then execute:
-
-    $ bundle install
-
-Or install it yourself as:
 
     $ gem install kobo_notes_binder
 
 ## Usage
 
-TODO: Write usage instructions here
+1. Plug-in Kobo device 
+2. Run command `kobo_notes_binder` in terminal
+3. Find book on your Desktop
+
+## Advance Usage
+
+`kobo_notes_binder -h`
+
+## Features
+
+- Export embedded book highlights
+
+Not tested
+- Ruby version less than 3.0
+- Non-DRM books purchased in Kobo store
+
+Not supported
+- Export of written annotations
+- Export of page bookmarks
+- Color customisation
+- DRM books
+
 
 ## Development
 
@@ -32,7 +44,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/kobo_notes_binder. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/kobo_notes_binder/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/antulik/kobo_notes_binder. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/antulik/kobo_notes_binder/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -40,4 +52,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the KoboNotesBinder project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/kobo_notes_binder/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the KoboNotesBinder project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/antulik/kobo_notes_binder/blob/master/CODE_OF_CONDUCT.md).

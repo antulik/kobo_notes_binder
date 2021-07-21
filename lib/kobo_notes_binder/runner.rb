@@ -11,16 +11,12 @@ class KoboNotesBinder::Runner
     has_many :bookmarks, primary_key: :ContentID, foreign_key: :VolumeID
   end
 
-  # Value examples
-  # tmp_dir: '/Users/anton/projects/ank/tmp/tmp_dir',
-  # local_kobo_db_path: '/Users/anton/projects/ank/tmp/tmp_dir/KoboReader.sqlite',
-  # local_original_epub_path: '/Users/anton/projects/ank/tmp/tmp_dir/Nine Lies About Work_ A Freethinking Leader’s Guide to the Real World.kepub.epub',
-  # volume_url: "file:///mnt/onboard/kepub/Nine Lies About Work_ A Freethinking Leader’s Guide to the Real World.kepub.epub"
   attr_accessor :kobo_device_path
   attr_accessor :tmp_dir
   attr_accessor :local_kobo_db_path
   attr_accessor :local_original_epub_path
   attr_accessor :volume_url
+  attr_accessor :debug_mode
 
   def initialize(opts = {}, kobo_device_path:)
     @kobo_device_path = kobo_device_path
@@ -28,6 +24,7 @@ class KoboNotesBinder::Runner
     @local_original_epub_path = opts[:local_original_epub_path]
     @volume_url = opts[:volume_url]
     @tmp_dir = opts[:tmp_dir]
+    @debug_mode = opts[:debug_mode]
 
     require "sqlite3"
     require "tty-prompt"
@@ -74,9 +71,18 @@ class KoboNotesBinder::Runner
     raw_epub_folder = extract_epub(local_original_epub_path, dir: tmp_dir)
 
     volume_url ||= book.ContentID
+    puts "Notes volume id: #{volume_url}"
 
     puts 'Searching for book notes'
     notes = Bookmark.where(VolumeID: volume_url)
+    puts "  Found #{notes.size} notes"
+
+    if debug_mode
+      puts 'Cloning raw folder'
+      clone_raw_epub_folder = File.dirname(raw_epub_folder) + '/raw_original'
+      FileUtils.rm_rf clone_raw_epub_folder
+      FileUtils.cp_r raw_epub_folder, clone_raw_epub_folder
+    end
 
     puts 'Embedding notes'
     notes.each do |note|
@@ -86,7 +92,7 @@ class KoboNotesBinder::Runner
     puts 'Binding book'
     new_epub_path = compile(volume_url: volume_url, tmp_dir: tmp_dir, raw_epub_folder: raw_epub_folder)
 
-    puts 'Book is binded'
+    puts 'Book is bound'
     new_epub_path
   end
 
@@ -143,12 +149,19 @@ class KoboNotesBinder::Runner
   end
 
   def process_note(note, raw_epub_folder:)
-    # puts
-    # puts 'processing note: '
-    # pp note
+    debug do
+      puts
+      puts 'processing note: '
+      pp note
+      nil
+    end
 
-    raise 'investigate ' if note.StartContainerChildIndex != -99
-    raise 'investigate ' if note.EndContainerChildIndex != -99
+    # Looks like `note.StartContainerChildIndex != -99` is for page bookmarks
+    # We can skip them for now
+    if note.StartContainerChildIndex != -99 || note.EndContainerChildIndex != -99
+      debug { '  Skipping note' }
+      return
+    end
 
     xml_path = raw_epub_folder + file_path(note)
     xml_string = File.read(xml_path)
@@ -223,7 +236,7 @@ class KoboNotesBinder::Runner
       end
     end
 
-    File.write xml_path, doc.to_s
+    File.write xml_path, doc.to_xhtml
   end
 
   def copy_db(kobo_device_path, dir:)
@@ -253,6 +266,15 @@ class KoboNotesBinder::Runner
     end
 
     epub_file
+  end
+
+  def debug
+    if debug_mode
+      result = yield
+      if result === String
+        puts result
+      end
+    end
   end
 end
 
