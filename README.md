@@ -23,13 +23,14 @@ The tool never changes files on the device, so it is safe to use it.
 
 ## Features
 
+Supported:
 - Export embedded book highlights
 
-Not tested
+Not tested:
 - Ruby version <2.6
 - Non-DRM books purchased in Kobo store
 
-Not supported
+Not supported:
 - Export of written annotations
 - Export of page bookmarks
 - Color customisation
