@@ -19,7 +19,16 @@ The tool never changes files on the device, so it is safe to use it.
 
 ## Advance Usage
 
-`kobo_notes_binder -h`
+```
+> kobo_notes_binder -h
+Usage: kobo_notes_binder [options]
+    -k, --kobo=PATH                  Path to kobo device. Default: /Volumes/KOBOeReader
+    -o, --output=PATH                Output folder. Default: ~/Desktop
+    -p, --open                       Open file at the end
+    -a, --application=NAME           Application name to open epub
+    -d, --debug                      Enable debug mode
+    -v, --[no-]verbose               Run verbosely
+```
 
 ## Features
 
